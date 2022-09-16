@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SAU
+namespace Projeto_farmacia
 {
     static class Program
     {
@@ -16,15 +16,7 @@ namespace SAU
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.run(new frmGrid());
-
-            frmLogin frm = new frmLogin();
-            frm.ShowDialog();
-            if (frm.LoginSucesso)
-            {
-                Application.Run(new frmPrincipal());
-            }
-           
+            Application.Run(new frmLogin());
         }
     }
 }
