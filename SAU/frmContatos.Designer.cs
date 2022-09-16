@@ -50,9 +50,13 @@ namespace SAU
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtNumeroEndereco = new System.Windows.Forms.TextBox();
             this.txtUf = new System.Windows.Forms.TextBox();
-            this.txtCep = new System.Windows.Forms.TextBox();
             this.txtTelefone = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.grpContatos = new System.Windows.Forms.GroupBox();
+            this.lstContatos = new System.Windows.Forms.ListBox();
+            this.btnFechar = new System.Windows.Forms.Button();
+            this.mskCep = new System.Windows.Forms.MaskedTextBox();
+            this.grpContatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblnome
@@ -77,11 +81,12 @@ namespace SAU
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(198, 90);
-            this.txtNome.MaxLength = 10;
+            this.txtNome.Location = new System.Drawing.Point(198, 88);
+            this.txtNome.MaxLength = 30;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(379, 20);
             this.txtNome.TabIndex = 0;
+            this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
             // 
             // txtEndereco
             // 
@@ -111,6 +116,7 @@ namespace SAU
             this.btnListar.TabIndex = 10;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
             // btnLimpar
             // 
@@ -241,25 +247,21 @@ namespace SAU
             this.txtNumeroEndereco.Size = new System.Drawing.Size(100, 20);
             this.txtNumeroEndereco.TabIndex = 3;
             this.txtNumeroEndereco.TextChanged += new System.EventHandler(this.txtNumeroEndereco_TextChanged);
+            this.txtNumeroEndereco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroEndereco_KeyPress);
             // 
             // txtUf
             // 
             this.txtUf.Location = new System.Drawing.Point(477, 171);
+            this.txtUf.MaxLength = 2;
             this.txtUf.Name = "txtUf";
             this.txtUf.Size = new System.Drawing.Size(100, 20);
             this.txtUf.TabIndex = 5;
             this.txtUf.TextChanged += new System.EventHandler(this.txtUf_TextChanged);
             // 
-            // txtCep
-            // 
-            this.txtCep.Location = new System.Drawing.Point(198, 194);
-            this.txtCep.Name = "txtCep";
-            this.txtCep.Size = new System.Drawing.Size(100, 20);
-            this.txtCep.TabIndex = 6;
-            // 
             // txtTelefone
             // 
             this.txtTelefone.Location = new System.Drawing.Point(198, 224);
+            this.txtTelefone.MaxLength = 11;
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(164, 20);
             this.txtTelefone.TabIndex = 7;
@@ -272,14 +274,58 @@ namespace SAU
             this.txtEmail.TabIndex = 8;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
+            // grpContatos
+            // 
+            this.grpContatos.BackColor = System.Drawing.Color.Orange;
+            this.grpContatos.Controls.Add(this.lstContatos);
+            this.grpContatos.Controls.Add(this.btnFechar);
+            this.grpContatos.Location = new System.Drawing.Point(332, 298);
+            this.grpContatos.Name = "grpContatos";
+            this.grpContatos.Size = new System.Drawing.Size(270, 160);
+            this.grpContatos.TabIndex = 17;
+            this.grpContatos.TabStop = false;
+            this.grpContatos.Text = "Relação Contatos";
+            this.grpContatos.Visible = false;
+            this.grpContatos.Enter += new System.EventHandler(this.grpContatos_Enter);
+            // 
+            // lstContatos
+            // 
+            this.lstContatos.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.lstContatos.FormattingEnabled = true;
+            this.lstContatos.Location = new System.Drawing.Point(9, 30);
+            this.lstContatos.Name = "lstContatos";
+            this.lstContatos.Size = new System.Drawing.Size(237, 95);
+            this.lstContatos.TabIndex = 1;
+            this.lstContatos.Click += new System.EventHandler(this.lstContatos_Click);
+            this.lstContatos.SelectedIndexChanged += new System.EventHandler(this.lstContatos_SelectedIndexChanged);
+            // 
+            // btnFechar
+            // 
+            this.btnFechar.Location = new System.Drawing.Point(171, 131);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(75, 23);
+            this.btnFechar.TabIndex = 0;
+            this.btnFechar.Text = "Fechar";
+            this.btnFechar.UseVisualStyleBackColor = true;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
+            // 
+            // mskCep
+            // 
+            this.mskCep.Location = new System.Drawing.Point(198, 194);
+            this.mskCep.Mask = "#####-###";
+            this.mskCep.Name = "mskCep";
+            this.mskCep.Size = new System.Drawing.Size(61, 20);
+            this.mskCep.TabIndex = 6;
+            // 
             // frmContatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 355);
+            this.ClientSize = new System.Drawing.Size(828, 504);
+            this.Controls.Add(this.mskCep);
+            this.Controls.Add(this.grpContatos);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtTelefone);
-            this.Controls.Add(this.txtCep);
             this.Controls.Add(this.txtUf);
             this.Controls.Add(this.txtNumeroEndereco);
             this.Controls.Add(this.txtCodigo);
@@ -301,9 +347,11 @@ namespace SAU
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.lblendereco);
             this.Controls.Add(this.lblnome);
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmContatos";
             this.Text = "Cadastro de Contatos";
             this.Load += new System.EventHandler(this.frmContatos_Load);
+            this.grpContatos.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,8 +380,11 @@ namespace SAU
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.TextBox txtNumeroEndereco;
         private System.Windows.Forms.TextBox txtUf;
-        private System.Windows.Forms.TextBox txtCep;
         private System.Windows.Forms.TextBox txtTelefone;
         private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.GroupBox grpContatos;
+        private System.Windows.Forms.Button btnFechar;
+        private System.Windows.Forms.ListBox lstContatos;
+        private System.Windows.Forms.MaskedTextBox mskCep;
     }
 }
